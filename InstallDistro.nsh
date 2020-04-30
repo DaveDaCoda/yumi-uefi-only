@@ -617,8 +617,12 @@ FunctionEnd
 
 ; Windows 10
  ${ElseIf} $DistroName == "Windows 10 Installer"
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -xr!bootx64.efi -o"$BootDir\" -y' 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -xr!bootx64.efi -xr!sources\install.wim -o"$BootDir\" -y' 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!bootx64.efi -aou -o"$BootDir\" -y'  
+ CreateDirectory "$EXEDIR\TEMPYUMI" ; Create the TEMPYUMI directory
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" sources\install.wim -aou -o"$EXEDIR\TEMPYUMI" -y'  
+ ExecWait 'Dism /Split-Image /ImageFile:"$EXEDIR\TEMPYUMI\install.wim" /SWMFile:"$EXEDIR\TEMPYUMI\install.swm" /FileSize:3800'
+ CopyFiles "$EXEDIR\TEMPYUMI\*.swm" "$BOOTDIR\"
  ReadEnvStr $R0 COMSPEC ; grab commandline
  nsExec::Exec "$R0 /C Rename $BootDir\EFI\BOOT\bootx64_1.efi win10.efi" ; rename efi file  
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\nif [ $${grub_platform} == $\"pc$\" ]; then ntldr /bootmgr; fi$\r$\nif [ $${grub_platform} == $\"efi$\" ]; then chainloader /EFI/BOOT/win10.efi; fi$\r$\n}$\r$\n#end $JustISOName" $R0

@@ -264,10 +264,22 @@ Function SelectionsPage
   Pop $CasperSelection  
   
 ; CasperSlider - TrackBar
-  !define TBM_SETPOS 0x0405
-  !define TBM_GETPOS 0x0400
-  !define TBM_SETRANGEMIN 0x0407
-  !define TBM_SETRANGEMAX 0x0408
+ !ifndef TBM_SETPOS
+   !define TBM_SETPOS 0x0405
+ !endif
+ !ifndef TBM_GETPOS
+   !define TBM_GETPOS 0x0400
+ !endif
+ !ifndef TBM_SETRANGEMIN
+   !define TBM_SETRANGEMIN 0x0407
+ !endif
+ !ifndef TBM_SETRANGEMAX
+   !define TBM_SETRANGEMAX 0x0408
+ !endif
+;  !define TBM_SETPOS 0x0405
+;  !define TBM_GETPOS 0x0400
+;  !define TBM_SETRANGEMIN 0x0407
+;  !define TBM_SETRANGEMAX 0x0408
 
   ${NSD_CreateLabel} 52% 178 25% 25 ""
   Pop $SlideSpot  
@@ -1161,50 +1173,50 @@ FunctionEnd
 !include "RemoveDistro.nsh" ; ##################################### ADD NEW DISTRO ########################################
 
 Function DoSyslinux ; Install Syslinux on USB
-  ${IfNot} ${FileExists} "$BootDir\multiboot\libcom32.c32" 
-  ${AndIf} ${FileExists} "$BootDir\multiboot\ldlinux.sys"   
-  MessageBox MB_ICONEXCLAMATION|MB_OK $(WarningSyslinuxOLD)
-  Quit
-  ${EndIf}
-  
-  ;IfFileExists "$BootDir\multiboot\libcom32.c32" SkipSyslinux CreateSyslinux ; checking for newer syslinux
-  IfFileExists "$BootDir\multiboot\menu\ldlinux.sys" SkipSyslinux CreateSyslinux ; checking for syslinux
-  CreateSyslinux:
+;  ${IfNot} ${FileExists} "$BootDir\multiboot\libcom32.c32" 
+;  ${AndIf} ${FileExists} "$BootDir\multiboot\ldlinux.sys"   
+;  MessageBox MB_ICONEXCLAMATION|MB_OK $(WarningSyslinuxOLD)
+;  Quit
+;  ${EndIf}
+;  
+;  ;IfFileExists "$BootDir\multiboot\libcom32.c32" SkipSyslinux CreateSyslinux ; checking for newer syslinux
+;  IfFileExists "$BootDir\multiboot\menu\ldlinux.sys" SkipSyslinux CreateSyslinux ; checking for syslinux
+;  CreateSyslinux:
   CreateDirectory $BootDir\multiboot\menu ; recursively create the directory structure if it doesn't exist
-  ;CreateDirectory $BootDir\multiboot\ISOS ; create ISOS folder  
-  DetailPrint $(ExecuteSyslinux)
-  ExecWait '$PLUGINSDIR\syslinux.exe -maf -d /multiboot/menu $BootDir' $R8
-  DetailPrint "Syslinux Errors $R8"
-  Banner::destroy
-  ${If} $R8 != 0
-  MessageBox MB_ICONEXCLAMATION|MB_OK $(WarningSyslinux)
-  ${EndIf} 
-  DetailPrint "Creating Label MULTIBOOT on $DestDisk"
-  nsExec::ExecToLog '"cmd" /c "LABEL $DestDiskMULTIBOOT"'
-  
-  SkipSyslinux: 
-  DetailPrint $(SkipSyslinux)
-  
-  ${If} ${FileExists} $BootDir\multiboot\menu\syslinux.cfg   
-  ${AndIf} ${FileExists} $BootDir\multiboot\menu\memdisk
-    DetailPrint "A Previous MultiBoot Installation was detected."
-   ; Call AddDir
-  ${Else}
-; Create and Copy files to your destination
-  DetailPrint "Adding required files to the $BootDir\multiboot directory..." 
-  CopyFiles "$PLUGINSDIR\YUMI-Copying.txt" "$BootDir\multiboot\YUMI-Copying.txt"  
-  CopyFiles "$PLUGINSDIR\license.txt" "$BootDir\multiboot\license.txt"   
-  
-; Copy these files to multiboot\menu
-  DetailPrint "Adding required files to the $BootDir\multiboot\menu directory..." 
-  CopyFiles "$PLUGINSDIR\syslinux.cfg" "$BootDir\multiboot\menu\syslinux.cfg"  
-  CopyFiles "$PLUGINSDIR\memdisk" "$BootDir\multiboot\menu\memdisk"      
-  ${EndIf}  
-
+  CreateDirectory $BootDir\multiboot\ISOS ; create ISOS folder  
+;  DetailPrint $(ExecuteSyslinux)
+;  ExecWait '$PLUGINSDIR\syslinux.exe -maf -d /multiboot/menu $BootDir' $R8
+;  DetailPrint "Syslinux Errors $R8"
+;  Banner::destroy
+;  ${If} $R8 != 0
+;  MessageBox MB_ICONEXCLAMATION|MB_OK $(WarningSyslinux)
+;  ${EndIf} 
+;  DetailPrint "Creating Label MULTIBOOT on $DestDisk"
+;  nsExec::ExecToLog '"cmd" /c "LABEL $DestDiskMULTIBOOT"'
+;  
+;  SkipSyslinux: 
+;  DetailPrint $(SkipSyslinux)
+;  
+;  ${If} ${FileExists} $BootDir\multiboot\menu\syslinux.cfg   
+;  ${AndIf} ${FileExists} $BootDir\multiboot\menu\memdisk
+;    DetailPrint "A Previous MultiBoot Installation was detected."
+;   ; Call AddDir
+;  ${Else}
+;; Create and Copy files to your destination
+;  DetailPrint "Adding required files to the $BootDir\multiboot directory..." 
+;  CopyFiles "$PLUGINSDIR\YUMI-Copying.txt" "$BootDir\multiboot\YUMI-Copying.txt"  
+;  CopyFiles "$PLUGINSDIR\license.txt" "$BootDir\multiboot\license.txt"   
+;  
+;; Copy these files to multiboot\menu
+;  DetailPrint "Adding required files to the $BootDir\multiboot\menu directory..." 
+;  CopyFiles "$PLUGINSDIR\syslinux.cfg" "$BootDir\multiboot\menu\syslinux.cfg"  
+;  CopyFiles "$PLUGINSDIR\memdisk" "$BootDir\multiboot\menu\memdisk"      
+;  ${EndIf}  
+;
 ; Make sure EFI\Boot directory and files exist.  
   ${If} ${FileExists} $BootDir\EFI\BOOT\BOOTX64.EFI 
   ${AndIf} ${FileExists} $BootDir\EFI\BOOT\grub.cfg
-  ${AndIf} ${FileExists} $BootDir\boot\grub\lnxboot.img 
+  ;${AndIf} ${FileExists} $BootDir\boot\grub\lnxboot.img 
    ;Call AddDir
   ${Else}  
 ; Copy GRUB2 EFI files 
@@ -1376,7 +1388,8 @@ StrCpy $R9 0 ; we start on page 0
   File /oname=$PLUGINSDIR\netbook.cfg "menu\netbook.cfg"
   File /oname=$PLUGINSDIR\anon.cfg "menu\anon.cfg" 
   File /oname=$PLUGINSDIR\linux.cfg "menu\linux.cfg" 
-  File /oname=$PLUGINSDIR\unlisted.cfg "menu\unlisted.cfg" 
+  File /oname=$PLUGINSDIR\other.cfg "menu\other.cfg"
+  ;File /oname=$PLUGINSDIR\unlisted.cfg "menu\unlisted.cfg" 
   File /oname=$PLUGINSDIR\liveusb "menu\liveusb"   
   File /oname=$PLUGINSDIR\7zG.exe "tools\7zG.exe"
   File /oname=$PLUGINSDIR\7z.dll "tools\7z.dll"  
