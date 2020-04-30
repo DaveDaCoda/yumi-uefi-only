@@ -14,18 +14,18 @@
   You should have received a copy of the GNU General Public License
   along with YUMI.  If not, see <http://www.gnu.org/licenses/>.
 
-  YUMI UEFI Copyright ©2011-2019 https://www.pendrivelinux.com (See YUMI-Copying.txt and YUMI-Readme.txt for more information, Credits, and Licensing)
+  YUMI UEFI Copyright ©2011-2020 https://www.pendrivelinux.com (See YUMI-Copying.txt and YUMI-Readme.txt for more information, Credits, and Licensing)
 */
 
 !define NAME "YUMI UEFI"
 !define FILENAME "YUMI-UEFI"
-!define VERSION "0.0.1.9"
+!define VERSION "0.0.2.2"
 !define MUI_ICON "images\usbicon.ico"
 
 ; MoreInfo Plugin - Adds Version Tab fields to Properties. Plugin created by onad http://nsis.sourceforge.net/MoreInfo_plug-in
 VIProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "pendrivelinux.com"
-VIAddVersionKey LegalCopyright "Copyright ©2019 Pendrivelinux.com"
+VIAddVersionKey LegalCopyright "Copyright ©2020 Pendrivelinux.com"
 VIAddVersionKey FileVersion "${VERSION}"
 VIAddVersionKey FileDescription "YUMI - Your Universal MultiBoot Integrator"
 VIAddVersionKey License "GPL Version 2"

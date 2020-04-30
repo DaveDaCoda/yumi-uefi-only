@@ -1,4 +1,4 @@
-YUMI UEFI (Your Universal Multiboot Integrator) ©2011-2019 https://www.pendrivelinux.com (covered under GNU GPL License) - see YUMI-Copying
+YUMI UEFI (Your Universal Multiboot Integrator) ©2011-2020 Lance https://www.pendrivelinux.com (covered under GNU GPL License) - see YUMI-Copying
 
 Background of YUMI:
 
@@ -22,6 +22,10 @@ Credits, Resources, and Third Party Tools used:
 Additional instructions and information for YUMI can be found HERE: https://www.pendrivelinux.com/yumi-multiboot-usb-creator/
 
 Changelog:
+
+04/29/20 Version 0.0.2.2: Update to support Solus, Feren OS, and Hiren's BootCD PE
+03/16/20 Version 0.0.2.1: Update to support Linux Mint Debian Edition, Manjaro 19.0x, and newer ESET Sysrescue CD.
+11/05/19 Version 0.0.2.0: Update to support Acedemix and Finnix x86/64. Force Clonezilla to boot from RAM.
 10/20/19 Version 0.0.1.9: Update to support Tuxtrans, newer KNOPPIX, GData, G4L, and ArchLinux.
 10/08/19 Version 0.0.1.8: Added Persistence % progress bar. Update to support Demon Linux, and Open Mandriva.
 10/07/19 Version 0.0.1.7: Update to support Ubuntu Budgie and Deepin. Fix various download links.

@@ -1,4 +1,4 @@
-YUMI UEFI (Your Universal Multiboot Integrator) ©2011-2019 https://www.pendrivelinux.com
+YUMI UEFI (Your Universal Multiboot Integrator) ©2011-2020 Lance https://www.pendrivelinux.com
 This Open Source tool is covered under GNU General Public License Version 2
 Source Code is made available at time of download from the official YUMI page:
 https://www.pendrivelinux.com/yumi-multiboot-usb-creator/

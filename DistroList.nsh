@@ -40,6 +40,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
 	 !insertmacro SetISOFileNames "" "" "" "" "" "" ""  
    
  !insertmacro SetISOFileNames "Linux Mint" "linuxmint*.iso" "https://www.linuxmint.com/download.php" "casper" "linux.cfg" "https://www.linuxmint.com" "Linux Mint"
+ !insertmacro SetISOFileNames "Linux Mint Debian" "lmde*.iso" "https://www.linuxmint.com/download_lmde.php" "casper" "linux.cfg" "https://www.linuxmint.com" "Linux Mint"
 
      !insertmacro SetISOFileNames "" "" "" "" "" "" ""
      !insertmacro SetISOFileNames "--- CentOS 32/64 Bit ---" "" "" "" "" "" ""
@@ -54,7 +55,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
      !insertmacro SetISOFileNames "--- Debian Live 32/64 Bit ---" "" "" "" "" "" ""
 	 !insertmacro SetISOFileNames "" "" "" "" "" "" ""
 	 
- !insertmacro SetISOFileNames "Debian Live" "debian-live*.iso" "https://cdimage.debian.org/debian-cd/current-live/i386/iso-hybrid/" "casper" "linux.cfg" "https://www.debian.org" "Debian Live"
+ !insertmacro SetISOFileNames "Debian Live" "debian-live*.iso" "https://cdimage.debian.org/debian-cd/current-live/i386/iso-hybrid/" "NULL" "linux.cfg" "https://www.debian.org" "Debian Live"
  ;!insertmacro SetISOFileNames "Debian Live 64bit" "debian-live*desktop.iso" "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/" "NULL" "linux.cfg" "http://live.debian.net" "Debian Live"
 
      !insertmacro SetISOFileNames "" "" "" "" "" "" ""
@@ -98,7 +99,8 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
      !insertmacro SetISOFileNames "" "" "" "" "" "" ""
      !insertmacro SetISOFileNames "--- Other Distros 32/64 Bit ---" "" "" "" "" "" ""
      !insertmacro SetISOFileNames "" "" "" "" "" "" ""	 
-	 
+
+ !insertmacro SetISOFileNames "Academix" "academix*.iso" "https://sourceforge.net/projects/academix/files/latest/download" "NULL" "linux.cfg" "https://academixproject.com/" "Academix"  
  ;!insertmacro SetISOFileNames "Alpine Linux" "alpine*.iso" "https://alpinelinux.org/downloads/" "NULL" "linux.cfg" "https://alpinelinux.org/" "Alpine Linux" 	 
  !insertmacro SetISOFileNames "AntiX" "antiX*.iso" "https://sourceforge.net/projects/antix-linux/files/latest/download" "NULL" "linux.cfg" "http://sourceforge.net/projects/antix-linux/" "AntiX"   
 ; !insertmacro SetISOFileNames "Linux Arcade" "archlinux*.iso" "" "NULL" "linux.cfg" "http://www.linuxarcade.tk" "LinuxArcade"   
@@ -113,6 +115,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
 ; !insertmacro SetISOFileNames "Damn Small Linux (DSL)" "dsl*initrd.iso" "ftp://distro.ibiblio.org/pub/linux/distributions/damnsmall/current/dsl-4.4.10-initrd.iso" "NULL" "linux.cfg" "http://www.damnsmalllinux.org" "DSL"
 ; !insertmacro SetISOFileNames "Elementary OS" "elementaryos-stable*.iso" "http://sourceforge.net/projects/elementaryos/files/stable/elementaryos-stable-amd64.20130810.iso/download" "NULL" "linux.cfg" "http://elementaryos.org/" "Elementary OS"
 ;Discontinued !insertmacro SetISOFileNames "Dreamlinux" "dreamlinux*.iso" "http://download.linux-live-cd.org/iso/Dreamlinux/Dreamlinux-5.iso" "NULL" "linux.cfg" "http://www.dreamlinux.info/" "Dreamlinux" 
+ !insertmacro SetISOFileNames "Feren OS" "Feren*.iso" "https://sourceforge.net/projects/ferenoslinux/files/latest/download" "casper" "linux.cfg" "https://ferenos.weebly.com/get-feren-os.html" "Feren OS"
  !insertmacro SetISOFileNames "Fuduntu" "Fuduntu*.iso" "http://sourceforge.net/projects/fuduntu/files/latest/download" "NULL" "linux.cfg" "http://www.fuduntu.org/" "Fuduntu"
 ;Discontinued !insertmacro SetISOFileNames "Fusion Linux" "Fusion-Linux*.iso" "http://fusionlinux.org/downloads/" "NULL" "linux.cfg" "http://fusionlinux.org/" "Fusion Linux"
  !insertmacro SetISOFileNames "JustBrowsing" "justbrowsing64*.iso" "https://sourceforge.net/projects/justbrowsing/files/64bit/justbrowsing64_20140808.iso/download" "NULL" "linux.cfg" "http://justbrowsing.info/" "JustBrowsing"
@@ -125,7 +128,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "LXLE Desktop" "lxle*.iso" "http://sourceforge.net/projects/lxle/files/latest/download?source=files" "casper" "linux.cfg" "http://lxle.net/" "LXLE Desktop" 
  ; BROKEN !insertmacro SetISOFileNames "Mageia Live" "Mageia*Live*x86_64*.iso" "http://www.mageia.org/en/downloads/get/?q=Mageia-5-LiveDVD-GNOME-x86_64-DVD.iso" "NULL" "linux.cfg" "http://www.mageia.org" "Mageia"
  !insertmacro SetISOFileNames "OpenMandriva" "openMandriva*.iso" "https://sourceforge.net/projects/openmandriva/files/latest/download" "NULL" "linux.cfg" "https://www.openmandriva.org/" "OpenMandriva"	
- !insertmacro SetISOFileNames "Manjaro" "Manjaro*.iso" "http://manjaro.github.io/download/" "NULL" "linux.cfg" "http://manjaro.org" "Manjaro"
+ !insertmacro SetISOFileNames "Manjaro" "Manjaro*.iso" "https://manjaro.org/downloads/official/xfce/" "NULL" "linux.cfg" "http://manjaro.org" "Manjaro"
  !insertmacro SetISOFileNames "mintyMac" "minty*.iso" "http://sourceforge.net/projects/mintymacpremium/files/latest/download" "casper" "linux.cfg" "http://sourceforge.net/projects/mintymacpremium/" "MintyMac"
  !insertmacro SetISOFileNames "MX Linux" "MX*.iso" "https://sourceforge.net/projects/mx-linux/files/latest/download" "NULL" "linux.cfg" "https://mxlinux.org/" "MX Linux"   
  !insertmacro SetISOFileNames "Mythbuntu" "mythbuntu*.iso" "http://www.mythbuntu.org/downloads" "NULL" "linux.cfg" "http://mythbuntu.org/" "Mythbuntu"
@@ -148,6 +151,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "SLAX (Tiny Slackware Based Distro)" "slax*.iso" "http://www.slax.org/download.php" "NULL" "linux.cfg" "http://slax.org" "SLAX"
  !insertmacro SetISOFileNames "Slitaz (Another Tiny Distro)" "slitaz*.iso" "http://distro.ibiblio.org/slitaz/iso/5.0/" "NULL" "linux.cfg" "http://www.slitaz.org" "SliTaZ"
  !insertmacro SetISOFileNames "LuninuX OS" "LuninuxOS*Desktop*.iso" "http://sourceforge.net/projects/luninuxos/files/latest/download" "NULL" "linux.cfg" "http://luninuxos.com" "LuninuX OS" 
+ !insertmacro SetISOFileNames "Solus" "Solus*.iso" "https://getsol.us/download/" "NULL" "linux.cfg" "https://getsol.us/home/" "Solus"
  !insertmacro SetISOFileNames "SolydX" "solydx*.iso" "http://solydxk.com/downloads/solydx/" "NULL" "linux.cfg" "http://solydxk.com" "SolydX Linux" 
  !insertmacro SetISOFileNames "Sparky Linux" "sparkylinux*.iso" "http://sourceforge.net/projects/sparkylinux/files/latest/download" "NULL" "linux.cfg" "http://sparkylinux.org" "Sparky Linux" 
  !insertmacro SetISOFileNames "Subgraph OS" "subgraph*.iso" "https://subgraph.com/sgos/download/index.en.html" "NULL" "linux.cfg" "https://subgraph.com" "Subgraph OS"
@@ -211,6 +215,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Deft (Forensics)" "deft*.iso" "http://www.deftlinux.net/download/" "NULL" "system.cfg" "http://www.deftlinux.net/" "Deft"
  !insertmacro SetISOFileNames "DRBL (Diskless Remote Boot in Linux)" "drbl-live*.iso" "http://sourceforge.net/projects/drbl/files/latest/download" "NULL" "system.cfg" "http://drbl.sourceforge.net" "DRBL"	 
  !insertmacro SetISOFileNames "EASEUS Disk Copy (Disk Cloning Tool)" "Disk*.iso" "http://download.easeus.com/free/EaseUS_DiskCopy_Home.exe" "NULL" "system.cfg" "http://www.easeus.com" "EASEUS Disk Copy"
+ !insertmacro SetISOFileNames "Finnix x86/64- BIOS ONLY" "finnix*.iso" "https://www.finnix.org/Download" "NULL" "system.cfg" "https://www.finnix.org/" "Finnix"
  !insertmacro SetISOFileNames "FreeDOS (Balder img)" "balder10.img" "http://www.finnix.org/files/balder10.img" "NULL" "system.cfg" "http://www.finnix.org/Balder" "Finnix Balder"
  !insertmacro SetISOFileNames "G4L (Ghost For Linux)" "g4l*.iso" "http://sourceforge.net/projects/g4l/files/latest/download" "NULL" "system.cfg" "http://sourceforge.net/projects/g4l/" "G4L"
  !insertmacro SetISOFileNames "GParted (Partition Tools)" "gparted-live*.iso" "http://sourceforge.net/projects/gparted/files/latest" "NULL" "system.cfg" "http://gparted.sourceforge.net" "gParted"
@@ -246,7 +251,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
 ;Unknown status !insertmacro SetISOFileNames "Linux Live Tools for OCZ" "ocz_tools*.iso" "NONE" "NULL" "other.cfg" "http://www.ocztechnologyforum.com/forum/showthread.php?99275-NEW!-Bootable-Linux-based-tools-for-OCZ-SSD-s" "OCZ" 
  !insertmacro SetISOFileNames "Falcon 4 Boot CD - BIOS ONLY" "F4UBCD*.iso" "NONE" "NULL" "other.cfg" "" ""
  !insertmacro SetISOFileNames "Hiren's Boot CD - BIOS ONLY" "Hiren*.iso" "NONE" "NULL" "other.cfg" "" ""
-; !insertmacro SetISOFileNames "Hiren's Boot PE" "Hiren*.iso" "NONE" "NULL" "other.cfg" "" ""
+ !insertmacro SetISOFileNames "Hiren's BootCD PE" "HBCD*.iso" "https://www.hirensbootcd.org/download/" "NULL" "other.cfg" "https://www.hirensbootcd.org/" "Hiren's BootCD PE"
 ; !insertmacro SetISOFileNames "Kon-Boot FREE" "kon-boot*free.zip" "https://www.dropbox.com/s/f5i4g9vlmwoxrtp/kon-boot1.1-free.zip" "NULL" "other.cfg" "http://www.piotrbania.com/all/kon-boot/" "Kon-Boot" 
 ; !insertmacro SetISOFileNames "Kon-Boot Purchased" "kon-boot*.exe" "NONE" "NULL" "other.cfg" "http://www.piotrbania.com/all/kon-boot/" "Kon-Boot" 
 

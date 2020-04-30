@@ -284,17 +284,45 @@ FunctionEnd
  Rename "$BootDir\multiboot\casper\$JustISOName\initrd.gz" "$BootDir\multiboot\$JustISOName\casper\initrd.lz"  
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /multiboot/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0 
  ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\casper\vmlinuz"
+  ${AndIf} ${FileExists} "$BootDir\multiboot\$JustISOName\$JustISO"  
+ !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"  
+ !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /multiboot/$JustISOName/$JustISO$\r$\nlinux /multiboot/$JustISOName/casper/vmlinuz iso-scan/filename=/multiboot/$JustISOName/$JustISO isofrom=/dev/disk/by-label/MULTIBOOT/multiboot/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=casper noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"  
+  ${AndIf} ${FileExists} "$BootDir\multiboot\$JustISOName\casper\initrd.lz"
+ !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/casper/initrd.lz" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"    
+ ${ElseIf} ${FileExists} "$BootDir\multiboot\$JustISOName\live\vmlinuz"
  ${AndIf} ${FileExists} "$BootDir\multiboot\$JustISOName\$JustISO"  
  !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"  
- !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /multiboot/$JustISOName/$JustISO$\r$\nlinux /multiboot/$JustISOName/casper/vmlinuz iso-scan/filename=/multiboot/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=casper noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"  
- ${AndIf} ${FileExists} "$BootDir\multiboot\$JustISOName\casper\initrd.lz"
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/casper/initrd.lz" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"    
+ !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /multiboot/$JustISOName/$JustISO$\r$\nlinux /multiboot/$JustISOName/live/vmlinuz iso-scan/filename=/multiboot/$JustISOName/$JustISO isofrom=/dev/disk/by-label/MULTIBOOT/multiboot/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=live noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"  
+ ${AndIf} ${FileExists} "$BootDir\multiboot\$JustISOName\live\initrd.lz"
+ !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/live/initrd.lz" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"    
  ${EndIf}
  
-; Debian Live (New Method) 
+ ; Linux Mint (New Method) 
+ ${ElseIf} $DistroName == "Linux Mint Debian"
+ CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to Directory
+ CopyFiles "$PLUGINSDIR\grubslug.cfg" "$BootDir\multiboot\$JustISOName\grub.cfg" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!*nitrd.* -ir!*mlinuz -o"$BootDir\multiboot\$JustISOName\" -y'  
+ Rename "$BootDir\multiboot\casper\$JustISOName\initrd.gz" "$BootDir\multiboot\$JustISOName\casper\initrd.lz"  
+ ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /multiboot/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0 
+ ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\casper\vmlinuz"
+  ${AndIf} ${FileExists} "$BootDir\multiboot\$JustISOName\$JustISO"  
+ !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"  
+ !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /multiboot/$JustISOName/$JustISO$\r$\nlinux /multiboot/$JustISOName/casper/vmlinuz iso-scan/filename=/multiboot/$JustISOName/$JustISO isofrom=/dev/disk/by-label/MULTIBOOT/multiboot/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=casper noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"  
+  ${AndIf} ${FileExists} "$BootDir\multiboot\$JustISOName\casper\initrd.lz"
+ !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/casper/initrd.lz" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"    
+ ${ElseIf} ${FileExists} "$BootDir\multiboot\$JustISOName\live\vmlinuz"
+ ${AndIf} ${FileExists} "$BootDir\multiboot\$JustISOName\$JustISO"  
+ !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"  
+ !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /multiboot/$JustISOName/$JustISO$\r$\nlinux /multiboot/$JustISOName/live/vmlinuz iso-scan/filename=/multiboot/$JustISOName/$JustISO isofrom=/dev/disk/by-label/MULTIBOOT/multiboot/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=live noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"  
+ ${AndIf} ${FileExists} "$BootDir\multiboot\$JustISOName\live\initrd.lz"
+ !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/live/initrd.lz" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"    
+ ${EndIf}
+ 
+; Debian Live Based (New Method) 
  ${ElseIf} $DistroName == "Debian Live"
   ${OrIf} $DistroName == "Raspberry Pi Desktop"
   ${OrIf} $DistroName == "Deepin"
+  ${OrIf} $DistroName == "Academix"
 
  CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to Directory
  CopyFiles "$PLUGINSDIR\grubslug.cfg" "$BootDir\multiboot\$JustISOName\grub.cfg" 
@@ -313,6 +341,31 @@ FunctionEnd
  !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /multiboot/$JustISOName/$JustISO$\r$\nlinux /multiboot/$JustISOName/live/$Vmlinuz iso-scan/filename=/multiboot/$JustISOName/$JustISO boot=live noprompt components config findiso=/multiboot/$JustISOName/$JustISO" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"  
  !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/live/$Initrd" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"     
  ${EndIf}
+ 
+; Clonezilla (New Method) - Debian Based - TORAM
+  ${ElseIf} $DistroName == "Clonezilla (Backup + Clone Tool)"
+  CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to Directory
+  CopyFiles "$PLUGINSDIR\grubslug.cfg" "$BootDir\multiboot\$JustISOName\grub.cfg" 
+  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!*nitrd* -ir!*mlinu* -o"$BootDir\multiboot\$JustISOName\" -y'  
+ 
+  FindFirst $0 $1 "$BootDir\multiboot\$JustISOName\live\initrd*" 
+  Call FindInitrd
+  FindFirst $0 $1 "$BootDir\multiboot\$JustISOName\live\*mlinu*"
+  Call FindVmlinuz
+ 
+  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /multiboot/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0    
+  !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"   
+
+  ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\live\$Initrd"  ; likely 86_64
+  ${AndIf} ${FileExists} "$BootDir\multiboot\$JustISOName\$JustISO" 
+  !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /multiboot/$JustISOName/$JustISO$\r$\nlinux /multiboot/$JustISOName/live/$Vmlinuz iso-scan/filename=/multiboot/$JustISOName/$JustISO boot=live noprompt components config toram=live,syslinux,EFI,boot,.disk,utils findiso=/multiboot/$JustISOName/$JustISO" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"  
+  !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/live/$Initrd" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"     
+  ${EndIf}
+  
+; Solus
+ ${ElseIf} $DistroName == "Solus"
+ CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" 
+ ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nset isofile='/multiboot/$JustISOName/$JustISO'$\r$\nloopback loop $$isofile$\r$\nlinux (loop)/boot/kernel iso-scan/filename=/multiboot/$JustISOName/$JustISO root=live:CDLABEL=SolusLiveBudgie ro rd.luks=0 rd.md=0 rd.live.overlay.overlayfs=1 quiet splash$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\ninitrd (loop)/boot/initrd.img$\r$\n}$\r$\n#end $JustISOName" $R0  
  
 ; Demon Linux 
  ${ElseIf} $DistroName == "Demon Linux (Penetration Testing)"
@@ -404,6 +457,11 @@ FunctionEnd
  CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to Directory 
  ${WriteToFile} "#start $JustISOName$\r$\nif [ $${grub_platform} == $\"pc$\" ]; then$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nset isofile=$\"/multiboot/$JustISOName/$JustISO$\"$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\nlinux16 /multiboot/menu/memdisk iso raw$\r$\ninitrd16 $$isofile$\r$\n}; fi$\r$\n#end $JustISOName" $R0  
  
+; Finnix 
+ ${ElseIf} $DistroName == "Finnix x86/64- BIOS ONLY" 
+ CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to Directory 
+ ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName - 32bit$\" {$\r$\nset gfxpayload=keep$\r$\nset isofile=$\"/multiboot/$JustISOName/$JustISO$\"$\r$\nloopback loop $$isofile$\r$\nlinux (loop)/boot/x86/linux findiso=$$isofile vga=791 nomodeset quiet$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\ninitrd (loop)/boot/x86/initrd.xz$\r$\n}$\r$\nmenuentry $\"$JustISOName - 64bit$\" {$\r$\nset gfxpayload=keep$\r$\nset isofile=$\"/multiboot/$JustISOName/$JustISO$\"$\r$\nloopback loop $$isofile$\r$\nlinux (loop)/boot/x86/linux64 findiso=$$isofile vga=791 nomodeset quiet$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\ninitrd (loop)/boot/x86/initrd.xz$\r$\n}$\r$\n#end $JustISOName" $R0  
+ 
 ; Trinity Rescue Kit (New Method) 
  ${ElseIf} $DistroName == "Trinity Rescue Kit - BIOS ONLY" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\$JustISOName\" -y'  
@@ -436,7 +494,8 @@ FunctionEnd
   ${OrIf} $DistroName == "Tuxtrans"  
   ${OrIf} $DistroName == "Lubuntu"
   ${OrIf} $DistroName == "Edubuntu" 
-  ${OrIf} $DistroName == "Emmabuntus"   
+  ${OrIf} $DistroName == "Emmabuntus"  
+  ${OrIf} $DistroName == "Feren OS"   
   ${OrIf} $DistroName == "EasyPeasy (NetBook Distro)"  
   ${OrIf} $DistroName == "Kodachi (Anonymous Browsing)"
  CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to Directory
@@ -518,6 +577,8 @@ FunctionEnd
  !insertmacro ReplaceInFile "SOMETHING.seed" "edubuntu.seed" "all" "all" "$BootDir\multiboot\menu\linux.cfg"  
  ${ElseIf} $DistroName == "Ubuntu Budgie"
  !insertmacro ReplaceInFile "SOMETHING.seed" "ubuntu-budgie.seed" "all" "all" "$BootDir\multiboot\menu\linux.cfg"
+ ${ElseIf} $DistroName == "Feren OS"
+ !insertmacro ReplaceInFile "SOMETHING.seed" "lubuntu.seed" "all" "all" "$BootDir\multiboot\menu\linux.cfg"
  ${EndIf}  
  
 ; OpenSUSE
@@ -573,6 +634,14 @@ FunctionEnd
  ${WriteToFile} "#start $JustISOName$\r$\ntitle Begin Install of Windows XP from $JustISO (Stage 1)$\r$\nfind --set-root /multiboot/$JustISOName/$JustISO$\r$\nmap (hd0) (hd1)$\r$\nmap (hd1) (hd0)$\r$\nmap --mem /multiboot/$JustISOName/firadisk.img (fd0)$\r$\nmap --mem /multiboot/$JustISOName/firadisk.img (fd1)$\r$\nmap --mem /multiboot/$JustISOName/$JustISO (0xff)$\r$\nmap --hook$\r$\nchainloader (0xff)/I386/SETUPLDR.BIN$\r$\n$\r$\ntitle Continue Windows XP Install from $JustISO (Stage 2)$\r$\nfind --set-root /multiboot/$JustISOName/$JustISO$\r$\nmap (hd0) (hd1)$\r$\nmap (hd1) (hd0)$\r$\nmap --mem /multiboot/$JustISOName/$JustISO (0xff)$\r$\nmap --hook$\r$\nchainloader (hd0)+1$\r$\n$\r$\ntitle Boot Windows XP - If fails, reboot with USB removed (Stage 3)$\r$\nmap (hd1) (hd0)$\r$\nmap (hd0) (hd1)$\r$\nroot (hd1,0)$\r$\nfind --set-root /ntldr$\r$\nchainloader /ntldr$\r$\n#end $JustISOName" $R0  
  File /oname=$PLUGINSDIR\firadisk.img "firadisk.img"  
  CopyFiles "$PLUGINSDIR\firadisk.img" "$BootDir\multiboot\$JustISOName\firadisk.img"    */
+ 
+; Hiren's BootCD PE
+ ${ElseIf} $DistroName == "Hiren's BootCD PE"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -xr!bootx64.efi -o"$BootDir\" -y' 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!bootx64.efi -aou -o"$BootDir\" -y'  
+ ReadEnvStr $R0 COMSPEC ; grab commandline
+ nsExec::Exec "$R0 /C Rename $BootDir\EFI\BOOT\bootx64_1.efi HBCDPE.efi" ; rename efi file  
+ ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\nif [ $${grub_platform} == $\"pc$\" ]; then ntldr /bootmgr; fi$\r$\nif [ $${grub_platform} == $\"efi$\" ]; then chainloader /EFI/BOOT/HBCDPE.efi; fi$\r$\n}$\r$\n#end $JustISOName" $R0
  
 ; RemixOS  
  ${ElseIf} $DistroName == "RemixOS"
@@ -684,7 +753,7 @@ FunctionEnd
  ${EndIf}
  
  
-; Mageia 
+; Mageia / Manjaro
   ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\boot\grub\kernels.cfg"  
   ${AndIf} $GrubConfigFile != "NULL" ; If native Grub config file does exist...  
   !insertmacro ReplaceInFile " /boot" " /multiboot/$JustISOName/boot" "all" "all" "$BootDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
@@ -693,6 +762,7 @@ FunctionEnd
   !insertmacro ReplaceInFile "misobasedir=manjaro" "misobasedir=/multiboot/$JustISOName/manjaro" "all" "all" "$BootDir\multiboot\$JustISOName\boot\grub\kernels.cfg"
   !insertmacro ReplaceInFile "misolabel=MJ" "misolabel=MULTIBOOT NULL-" "all" "all" "$BootDir\multiboot\$JustISOName\boot\grub\kernels.cfg"
   !insertmacro ReplaceInFile "misolabel=M1" "misolabel=MULTIBOOT NULL-" "all" "all" "$BootDir\multiboot\$JustISOName\boot\grub\kernels.cfg"
+  !insertmacro ReplaceInFile "misolabel=MANJ" "misolabel=MULTIBOOT NULL-" "all" "all" "$BootDir\multiboot\$JustISOName\boot\grub\kernels.cfg"  
   !insertmacro ReplaceInFile "$\"/boot/" "$\"/multiboot/$JustISOName/boot" "all" "all" "$BootDir\multiboot\$JustISOName\boot\grub\kernels.cfg"
   !insertmacro ReplaceInFile " /boot/" " /multiboot/$JustISOName/boot" "all" "all" "$BootDir\multiboot\$JustISOName\boot\grub\loopback.cfg"
   !insertmacro ReplaceInFile "grub_theme=/boot" "grub_theme=/multiboot/$JustISOName/boot" "all" "all" "$BootDir\multiboot\$JustISOName\boot\grub\variable.cfg"  
@@ -1236,7 +1306,8 @@ FunctionEnd
  
 ; ESET SysRescue Live
    ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\eset-favicon.ico" 
-   !insertmacro ReplaceInFile "live-media=/dev/disk/by-label/eSysRescueLiveCD" " " "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\txt.cfg"    
+   !insertmacro ReplaceInFile "live-media=/dev/disk/by-label/eSysRescueLiveCD" " " "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\txt.cfg"   
+   !insertmacro ReplaceInFile "/dev/disk/by-label/eSysRescueLiveCD" "/dev/disk/by-label/MULTIBOOT" "all" "all" "$BootDir\multiboot\$JustISOName\boot\grub\grub.cfg"   
    ${EndIf}  
 
 ; RIP Linux
