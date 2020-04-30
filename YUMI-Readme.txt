@@ -1,0 +1,43 @@
+YUMI UEFI (Your Universal Multiboot Integrator) ©2011-2019 https://www.pendrivelinux.com (covered under GNU GPL License) - see YUMI-Copying
+
+Background of YUMI:
+
+YUMI is an easy to use Multiboot script created using NSIS. YUMI's purpose is to help automate the creation of a bootable USB Flash Drive that can be used to boot multiple Linux based distributions (one at a time).
+The end result should be a bootable USB Flash drive that will get you up and running with your chosen Live Distributions, all without having to do the research and perform the steps by hand. 
+
+How YUMI Works:
+
+YUMI utilizes a Syslinux MBR to make the chosen drive bootable. Syslinux then hands control over to GRUB2 for Legacy BIOS booting. For UEFI booting GRUB is nativaly used. Distribution ISO files are copied directly or extracted using 7zip to the multiboot folder on the USB device. Configuration files are used to house the menus used to boot each distribution. 
+
+Credits, Resources, and Third Party Tools used:
+
+* Remnants of Cedric Tissieres's Tazusb.exe for Slitaz (slitaz@objectif-securite.ch) may reside in the YUMI script, as it was derived from UUI, which was originally inspired by Tazusb.exe. 
+* Created with NSIS Installer © Contributors http://nsis.sourceforge.net (needed to compile the YUMI.nsi script) - http://nsis.sourceforge.net/License
+* Syslinux © H. Peter Anvin http://syslinux.zytor.com (unmodified binary used)
+* GRUB © Free Software Foundation, Inc. http://www.gnu.org/software/grub/grub.html
+* 7-Zip is © Igor Pavlovis http://7-zip.org (unmodified binaries were used)
+* Fat32format.exe © Tom Thornhill Ridgecorp Consultants http://www.ridgecrop.demon.co.uk (unmodified binary used)
+* Tuffy Font © Thatcher Ulrich http://tulrich.com/fonts/ (unmodified binary used)
+
+Additional instructions and information for YUMI can be found HERE: https://www.pendrivelinux.com/yumi-multiboot-usb-creator/
+
+Changelog:
+10/20/19 Version 0.0.1.9: Update to support Tuxtrans, newer KNOPPIX, GData, G4L, and ArchLinux.
+10/08/19 Version 0.0.1.8: Added Persistence % progress bar. Update to support Demon Linux, and Open Mandriva.
+10/07/19 Version 0.0.1.7: Update to support Ubuntu Budgie and Deepin. Fix various download links.
+05/30/19 Version 0.0.1.6: Update to support newer Dr.Web and Kaspersky Rescue Disk and OpenSuse Leap. Add support for BionicPup, MX Linux, and Emmabuntus.
+04/28/19 Version 0.0.1.5: Quick fix to support newer Parted Magic 2019.
+04/27/19 Version 0.0.1.4: Update to support Manjaro 18.04, System Rescue Cd 6.0.3. Added support for Raspberry Pi Desktop.
+02/14/19 Version 0.0.1.3: Update to support Kodachi and Memtest86. Implement 7zip version 18.6. Fix broken Redo Backup homepage link. Add Anonymous Browsers section. Add Home, FAQ and Support links.
+01/06/19 Version 0.0.1.2: Fix to remove duplicate Linux Distributions Menu entry. Change Grub 2 to set root by --label MULTIBOOT. Revert to set gfxmode=640x480 as auto still creates issues.
+01/05/19 Version 0.0.1.1: Update to support Acronis True Image 2019. Make Memtest 86+ option only appear for BIOS boot. Change to set gfxmode=auto
+12/27/18 Version 0.0.1.0: Fix case in configfile path (change from EFI/boot to EFI/BOOT) in boot/grub/grub.cfg. Update to use GRUB 2.03.
+11/04/18 Version 0.0.0.9: Update to support newer Ubuntu and derivitives using initrd instead of initrd.lz,.gz, etc.
+04/26/18 Version 0.0.0.8: Fix broken links.
+03/10/18 Version 0.0.0.7: Update to support UEFI 32 bit firmware. Update to support newer Debian Live, and Fedora Workstation Live. 
+12/10/17 Version 0.0.0.6: Update to support AEOMI Backupper. Fix broken Tails.
+10/06/17 Version 0.0.0.5: Update to support newer Tails and Manjaro. Fix broken Debian, Lubuntu, and Xubuntu links. Replace empty spaces in copied ISO files with dashes.
+01/19/17 Version 0.0.0.4: Fix to replace empty spaces in Distro filename with dashes. Fix to display only FDD+HDD. Correct some wording.
+08/19/16 Version 0.0.0.3: Add support for Arch Bang, Skywave Linux, and Cyborg Linux.
+07/28/16 Version 0.0.0.2: Fix entry for Slacko Puppy UEFI
+06/28/16 Version 0.0.0.1: Initial Release.
