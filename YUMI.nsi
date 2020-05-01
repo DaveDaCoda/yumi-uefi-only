@@ -1191,8 +1191,8 @@ Function DoSyslinux ; Install Syslinux on USB
 ;  ${If} $R8 != 0
 ;  MessageBox MB_ICONEXCLAMATION|MB_OK $(WarningSyslinux)
 ;  ${EndIf} 
-;  DetailPrint "Creating Label MULTIBOOT on $DestDisk"
-;  nsExec::ExecToLog '"cmd" /c "LABEL $DestDiskMULTIBOOT"'
+  DetailPrint "Creating Label MULTIBOOT on $DestDisk"
+  nsExec::ExecToLog '"cmd" /c "LABEL $DestDiskMULTIBOOT"'
 ;  
 ;  SkipSyslinux: 
 ;  DetailPrint $(SkipSyslinux)
